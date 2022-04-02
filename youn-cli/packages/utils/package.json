@@ -1,0 +1,26 @@
+{
+  "name": "@youn-cli/utils",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "mac_yang <email_yangzeng@126.com>",
+  "homepage": "https://github.com/cyz0323/youn#readme",
+  "license": "ISC",
+  "main": "lib/utils.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyz0323/youn.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\""
+  },
+  "bugs": {
+    "url": "https://github.com/cyz0323/youn/issues"
+  }
+}
