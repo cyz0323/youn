@@ -5,7 +5,10 @@
   "author": "mac_yang <email_yangzeng@126.com>",
   "homepage": "https://github.com/cyz0323/youn#readme",
   "license": "ISC",
-  "main": "lib/core.js",
+  "main": "bin/core.js",
+  "bin": {
+    "youn": "bin/index.js"
+  },
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -26,5 +29,5 @@
   "dependencies": {
     "@youn-cli/utils": "^1.0.2"
   },
-  "gitHead": "b7b03b676973d87049dac86d2d14319c0612ef80"
+  "gitHead": "a489ccbf99ef6bb99f44322e91446b26e442f318"
 }
