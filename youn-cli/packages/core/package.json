@@ -1,6 +1,6 @@
 {
   "name": "@youn-cli/core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "youn-cli core",
   "author": "mac_yang <email_yangzeng@126.com>",
   "homepage": "https://github.com/cyz0323/youn#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/cyz0323/youn/issues"
   },
   "dependencies": {
-    "@youn-cli/utils": "^1.0.2"
+    "@youn-cli/utils": "^1.0.3"
   },
   "gitHead": "a489ccbf99ef6bb99f44322e91446b26e442f318"
 }
