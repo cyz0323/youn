@@ -1,6 +1,6 @@
 {
   "name": "@youn-cli/utils",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "> TODO: description",
   "author": "mac_yang <email_yangzeng@126.com>",
   "homepage": "https://github.com/cyz0323/youn#readme",
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/cyz0323/youn/issues"
   },
-  "gitHead": "a489ccbf99ef6bb99f44322e91446b26e442f318"
+  "gitHead": "e2a3a22b44b4aaa2dc91d05a283e0fba0fd949bc",
+  "publishConfig": {
+    "access": "public"
+  }
 }
