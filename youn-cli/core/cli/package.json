@@ -30,6 +30,7 @@
     "@youn-cli/get-npm-info": "file:../../utils/get-npm-info",
     "@youn-cli/log": "file:../../utils/log",
     "@youn-cli/utils": "file:../../utils/utils",
+    "@youn-cli/init": "file:../../commands/init",
     "colors": "^1.4.0",
     "commander": "^8.3.0",
     "dotenv": "^16.0.0",

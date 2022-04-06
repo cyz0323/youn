@@ -1,22 +1,24 @@
 'use strict';
 
-module.exports = core;
+module.exports = index;
 
 const semver = require('semver');
 const colors = require('colors/safe');
 const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
 const { Command } = require('commander');
-
 const path = require('path');
 
-const pkg = require('../package.json');
 const log = require('@youn-cli/log');
+const init = require("@youn-cli/init");
+
 const consts = require('./const');
+const pkg = require('../package.json');
+
 
 let args;
 const program = new Command();
-function core() {
+function index() {
   try{
     // 脚手架版本
     checkPkgVersion();
@@ -48,8 +50,16 @@ function registerCommand(){
     .version(pkg.version)
     .option('-d, --debug', '是否开启调试模式', false)
 
+  // 注册指令 init
+  program
+    .command('init [projectName]')
+    .option('-f, --force', '是否强制初始化项目')
+    .action(init);
+
+  // 开启 debug 模式
   program.on('option:debug', function(){
-    if(program.debug){
+    const opts = program.opts();
+    if(opts.debug){
       process.env.LOG_LEVEL = 'verbose';
     } else {
       process.env.LOG_LEVEL = 'info';
@@ -57,6 +67,22 @@ function registerCommand(){
     log.level = process.env.LOG_LEVEL;
     log.verbose('test');
   })
+
+  // 对未知命令处理监听
+  program.on('command:*', function(obj){
+    const availableCommands = program.commands.map(cmd => cmd.name());
+    console.log(colors.red('未知命令：'+ obj[0]));
+    if(availableCommands.length > 0){
+      console.log(colors.red('可使用指令：' + availableCommands.join(',')));
+    }
+  })
+
+  // 判断是否输入了入参，没参数给出提示内容
+  // console.log(program);
+  // if(program.args && program.args.length < 1){
+  //   program.outputHelp();
+  //   console.log();
+  // }
   program.parse(process.argv);
 }
 
