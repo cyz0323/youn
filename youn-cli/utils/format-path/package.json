@@ -1,7 +1,7 @@
 {
-  "name": "@youn-cli/init",
+  "name": "@youn-cli/format-path",
   "version": "1.0.1",
-  "description": "youn-cli init",
+  "description": "> TODO: description",
   "author": "mac_yang <email_yangzeng@126.com>",
   "homepage": "https://github.com/cyz0323/youn#readme",
   "license": "ISC",
@@ -25,9 +25,5 @@
   },
   "bugs": {
     "url": "https://github.com/cyz0323/youn/issues"
-  },
-  "dependencies": {
-    "@youn-cli/command": "file:../../modules/command",
-    "@youn-cli/log": "file:../../utils/log"
   }
 }

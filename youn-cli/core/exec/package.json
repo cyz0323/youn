@@ -1,7 +1,7 @@
 {
-  "name": "@youn-cli/init",
+  "name": "@youn-cli/exec",
   "version": "1.0.1",
-  "description": "youn-cli init",
+  "description": "youn-cli execute package",
   "author": "mac_yang <email_yangzeng@126.com>",
   "homepage": "https://github.com/cyz0323/youn#readme",
   "license": "ISC",
@@ -27,7 +27,7 @@
     "url": "https://github.com/cyz0323/youn/issues"
   },
   "dependencies": {
-    "@youn-cli/command": "file:../../modules/command",
-    "@youn-cli/log": "file:../../utils/log"
+    "@youn-cli/log": "file:../../utils/log",
+    "@youn-cli/package": "file:../../modules/package"
   }
 }

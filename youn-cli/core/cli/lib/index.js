@@ -11,31 +11,18 @@ const path = require('path');
 
 const log = require('@youn-cli/log');
 const init = require("@youn-cli/init");
+const exec = require("@youn-cli/exec");
 
 const consts = require('./const');
 const pkg = require('../package.json');
 
-
-let args;
 const program = new Command();
-function index() {
+async function index() {
   try{
-    // 脚手架版本
-    checkPkgVersion();
-    // node 版本检查
-    checkNodeVersion();
-    // 检查root
-    checkRoot();
-    // 操作用户主目录
-    checkUserHome();
-    // 入参检查
-    // checkInputArgs();
-    // 环境变量、命令参数变量
-    checkEnv();
-    // 检查是否需要全局更新, 版本号检查
-    checkGlobalUpdate();
+    await prepare();
     // 命令注册
     registerCommand();
+    init();
   } catch (e) {
     log.error(e.message);
   }
@@ -49,12 +36,13 @@ function registerCommand(){
     .usage('<command> [options]')
     .version(pkg.version)
     .option('-d, --debug', '是否开启调试模式', false)
+    .option('-tp, --targetPath <targetPath>', '是否指定本地调试文件路径', '')
 
   // 注册指令 init
   program
     .command('init [projectName]')
     .option('-f, --force', '是否强制初始化项目')
-    .action(init);
+    .action(exec);
 
   // 开启 debug 模式
   program.on('option:debug', function(){
@@ -66,6 +54,11 @@ function registerCommand(){
     }
     log.level = process.env.LOG_LEVEL;
     log.verbose('test');
+  })
+
+  // 指定targetPath
+  program.on('option:targetPath', function(e){
+    process.env.CLI_TARGET_PATH = e;
   })
 
   // 对未知命令处理监听
@@ -86,6 +79,18 @@ function registerCommand(){
   program.parse(process.argv);
 }
 
+async function prepare(){
+  // 脚手架版本
+  checkPkgVersion();
+  // 检查root
+  checkRoot();
+  // 操作用户主目录
+  checkUserHome();
+  // 环境变量、命令参数变量
+  checkEnv();
+  // 检查是否需要全局更新, 版本号检查
+  await checkGlobalUpdate();
+}
 
 async function checkGlobalUpdate() {
   // 获取最新版本号，和模块名
@@ -106,14 +111,14 @@ async function checkGlobalUpdate() {
 function checkEnv() {
   const dotenv = require('dotenv');
   const dotenvPath = path.resolve(userHome, '.env');
-  let config;
+  // let config;
   if(pathExists(dotenvPath)){
-    config = dotenv.config({
+    dotenv.config({
       path: path.resolve(userHome, '.env')
     })
   }
   createDefaultConfig();
-  log.verbose("环境变量："+JSON.stringify(config), "   配置变量："+process.env.CLI_HOME_PATH);
+  // log.verbose("环境变量："+JSON.stringify(config), "   配置变量："+process.env.CLI_HOME_PATH);
 }
 function createDefaultConfig(){
   const cliconfig = {
@@ -127,21 +132,6 @@ function createDefaultConfig(){
   process.env.CLI_HOME_PATH = cliconfig.clihome;
 }
 
-function checkInputArgs () {
-  const minimist = require('minimist');
-  args = minimist(process.argv.slice(2))
-  // console.log(args);
-  function checkArgs () {
-    if(args.debug){
-      process.env.LOG_LEVEL = 'verbose';
-    } else {
-      process.env.LOG_LEVEL = 'info';
-    }
-    log.level = process.env.LOG_LEVEL;
-  }
-  checkArgs();
-}
-
 function checkUserHome () {
   if(!userHome || !pathExists(userHome)){
     throw new Error(colors.red("当前用户主目录不存在！"));
@@ -151,14 +141,6 @@ function checkUserHome () {
 function checkRoot() {
   // console.log(process.geteuid());
   // require('root-check')();
-}
-
-function checkNodeVersion () {
-  const currentVersion = process.version;
-  const lowestVersion = consts.LOWEST_NODE_VERSION;
-  if(!semver.gte(currentVersion, lowestVersion)){
-    throw new Error(colors.red(`youn-cli 需要安装 ${lowestVersion} 以上版本 Node`))
-  }
 }
 
 // 打印版本号

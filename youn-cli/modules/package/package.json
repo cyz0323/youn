@@ -1,14 +1,11 @@
 {
-  "name": "@youn-cli/core",
+  "name": "@youn-cli/package",
   "version": "1.0.1",
-  "description": "youn-cli core",
+  "description": "youn-cli npm modules",
   "author": "mac_yang <email_yangzeng@126.com>",
   "homepage": "https://github.com/cyz0323/youn#readme",
   "license": "ISC",
-  "main": "bin/core.js",
-  "bin": {
-    "youn": "bin/index.js"
-  },
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -16,32 +13,26 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cyz0323/youn.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\""
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/cyz0323/youn/issues"
   },
   "dependencies": {
+    "@youn-cli/format-path": "file:../../utils/format-path",
     "@youn-cli/get-npm-info": "file:../../utils/get-npm-info",
-    "@youn-cli/log": "file:../../utils/log",
     "@youn-cli/utils": "file:../../utils/utils",
-    "@youn-cli/init": "file:../../commands/init",
-    "@youn-cli/exec": "file:../exec",
-    "colors": "^1.4.0",
-    "commander": "^8.3.0",
-    "dotenv": "^16.0.0",
+    "fs-extra": "^9.0.1",
+    "npminstall": "^5.8.0",
     "path-exists": "^4.0.0",
-    "root-check": "^2.0.0",
-    "semver": "^7.3.5",
-    "user-home": "^3.0.0"
-  },
-  "gitHead": "e2a3a22b44b4aaa2dc91d05a283e0fba0fd949bc",
-  "publishConfig": {
-    "access": "public"
+    "pkg-dir": "^4.2.0"
   }
 }
